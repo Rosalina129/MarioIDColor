@@ -8,7 +8,6 @@
 <body>
   <div class="colorPicker" style="text-align: center;">
     <form>
-      <a href="ique.html">Switch to IQue Version</a>
       <p>Select a Color.</p>
       <table style="margin:0 auto" border="1">
         <tbody>
@@ -118,9 +117,13 @@
                           <label>Clear</label>
                         </div>
                         <div>
-                          <input type="button" value="Generate!" style="margin-top:8px;" onclick="cheatCodeGenerate()">
+                          <input type="button" value="Generate for USA[U]" style="margin-top:8px;"
+                            onclick="cheatCodeGenerate(0)">
+                          <input type="button" value="Generate for CHN(iQue)" style="margin-top:8px;"
+                            onclick="cheatCodeGenerate(1)">
                         </div>
                       </div>
+
                     </td>
                   </tr>
                 </tbody>
@@ -141,7 +144,7 @@
               <table>
                 <tbody>
                   <tr>
-                    <td width="200">
+                    <td>
                       <textarea style="font-family: monospace; height: 500px; width: 245px;"
                         id="GeneratedCode"></textarea>
                     </td>
@@ -160,7 +163,12 @@
       </table>
     </form>
   </div>
-
+<footer>
+  <p>© 2016~2023 Collei_Madcat, Unreal_Neo Studios. All Rights Reserved.</p>
+  <p>© CaptainSwag101 M64MM2 and Color Generator.</p>
+  <p>© GlitchyPSIX M64MM3</p>
+  <p>This Color Code Generator is Public domain, technical support for creators in the Super Mario 64 Blooper Community, and is free for anyone to use, co-developed by 8192Bit</p>
+</footer>
 </body>
 <script>
   var masks = {
@@ -311,7 +319,7 @@
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
   }
   var backColor = ["#00ff00", "#ff00ff", "#0000ff", "#ff0000", "#ffff00"];
-  var memoryAddress = [
+  var memoryAddress = [[
     0x8107EC38,
     0x8107EC40,
     0x8107EC98,
@@ -323,8 +331,21 @@
     0x8107EC20,
     0x8107EC28,
     0x8107EC68,
-    0x8107EC70,
-  ]
+    0x8107EC70,//USA
+  ], [
+    0x810610A8,
+    0x810610B0,
+    0x81061108,
+    0x81061110,
+    0x810610F0,
+    0x810610F8,
+    0x810610C0,
+    0x810610C8,
+    0x81061090,
+    0x81061098,
+    0x810610D8,
+    0x810610E0 //CHN
+  ]]
 </script>
 
 <script>
@@ -356,12 +377,12 @@
   }
   function copyContent() {
     document.getElementById("GeneratedCode").focus()
-    document.getElementById("GeneratedCode").select();
+    document.getElementById("GeneratedCode").select()
     if (document.execCommand("copy")) {
-      alert("Successfully copied the code to clipboard.");
+      alert("Successfully copied the code to clipboard.")
     }
     else {
-      alert("Failed to copy the code to clipboard. Have you got the clipboard premission?");
+      alert("Failed to copy the code to clipboard. Have you got the clipboard premission?")
     }
     // legacy API execCommand used here to avoid mobile browser clipboard problem
   }
@@ -392,7 +413,7 @@
     run("#000000", "face");
     run("#e39d25", "blocks");
   }
-  function setCheatCode() {
+  function setCheatCode(index) {
     var cheatColorTemp = [
       [hatShadow.value, hairShadow.value, skinShadow.value, glovesShadow.value, pantsShadow.value, shoesShadow.value],
       [hatMain.value, hairMain.value, skinMain.value, glovesMain.value, pantsMain.value, shoesMain.value]]
@@ -408,16 +429,16 @@
         temp_a = cheatColorTemp[b][a].slice(1, 7)
         temp_b = temp_a.slice(0, 4)
         temp_c = temp_a.slice(4, 6) + "00"
-        temp_d = (memoryAddress[temp_e] + 0).toString('16')
-        temp_f = (memoryAddress[temp_e] + 2).toString('16')
+        temp_d = (memoryAddress[index][temp_e] + 0).toString('16')
+        temp_f = (memoryAddress[index][temp_e] + 2).toString('16')
         temp_e++
         final = final + temp_d + " " + temp_b + "\r\n" + temp_f + " " + temp_c + "\r\n";
       }
     }
     return final.toUpperCase();
   }
-  function cheatCodeGenerate() {
-    document.getElementById("GeneratedCode").value = setCheatCode();
+  function cheatCodeGenerate(index) {
+    document.getElementById("GeneratedCode").value = setCheatCode(index);
   }
   function run(color, queryID) {
     ctx.fillStyle = color
@@ -477,10 +498,16 @@
 </script>
 <style>
   * {
-    font-family: DINPro;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
 
   .colorPicker table td {
     text-align: center;
+  }
+  footer {
+    text-align: center;
+  }
+  footer p {
+    margin:0 auto;
   }
 </style>
