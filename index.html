@@ -11,87 +11,6 @@
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css"/>
-    <style type="text/css">
-      body {
-        background-image: url(images/background.jpg);
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-position: center center;
-        background-size: cover;
-      }
-      .mdl-layout__container {
-        background-color: rgba(255,254,255,0.8);
-      }
-      .mdl-layout__header .mdl-layout-title {
-        font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif !important;
-      }
-      .colorPicker{
-        display: flex;
-        margin: 0 auto;
-        justify-content: center;
-      }
-      .footer {
-        text-align:center;
-      }
-      .transition-left {
-        transform-origin:center right;
-      }
-      .footer p {
-        margin:0.5em 0;
-      }
-      .pages-bottom-right {
-        position:fixed;
-        display:flex;
-        right:0;
-        bottom:0;
-        margin:0 2em 2em 0;
-        z-index:900;
-        flex-direction:column;
-      }
-      .pages-bottom-right button {
-        margin:0.25em 0;
-      }
-      .mdl-dialog {
-        min-width:360px;
-        width:inherit;
-        max-width:max-content;
-      }
-      .generate-area {
-        margin-top:1em;
-        display:flex;
-        justify-content:space-around;
-      }
-      .generate-buttons {
-        margin:0 0.25em;
-      }
-      .background-color-setting-radios div {
-        margin:0.5em 0;
-      }
-      .padding-1 {
-        padding:1em;
-      }
-      .padding-2 {
-        padding:1.5em;
-      }
-      .padding-3 {
-        padding:2em;
-      }
-      .margin-1{
-        margin:0.25em;
-      }
-      .margin-2{
-        margin:0.5em;
-      }
-      .margin-3{
-        margin:1em;
-      }
-      .margin-4{
-        margin:2em;
-      }
-      .blur-1{
-        backdrop-filter: blur(16px);
-      }
-    </style>
   </head>
   
   <body>
@@ -136,8 +55,8 @@
         <!--Page Content Start-->
         <div class="page-content padding-1">
           <form>
-            <div style="display:flex">
-              <img src="images/banner.png" style="margin:0 auto; width:768px;">
+            <div class="banner-image">
+              <img src="images/banner.png">
             </div>
             <div class="colorPicker padding-1" style="text-align:center;">
               <div class="marioID-color-picker-area mdl-shadow--6dp padding-3 margin-4 blur-1">
