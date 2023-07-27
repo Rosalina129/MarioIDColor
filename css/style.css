@@ -1,5 +1,5 @@
 @media screen and (max-width:480px) {
-	.mdl-layout-title {
+	.mdl-layout__header-row .mdl-layout-title {
         display:none;
     }
 }
