@@ -182,26 +182,3 @@ const sound = [
     new Audio("audio/zelda-grass.ogg"),
     new Audio("audio/wrong.wav")
 ];
-
-var querys = [
-    document.querySelector('#hatColor'),
-    document.querySelector('#hatColorShadow'),
-    document.querySelector('#pantsColor'),
-    document.querySelector('#pantsColorShadow'),
-    document.querySelector('#hairColor'),
-    document.querySelector('#hairColorShadow'),
-    document.querySelector('#skinColor'),
-    document.querySelector('#skinColorShadow'),
-    document.querySelector('#glovesColor'),
-    document.querySelector('#glovesColorShadow'),
-    document.querySelector('#shoesColor'),
-    document.querySelector('#shoesColorShadow'),
-]
-var canvasPreviewQuerys = [
-    document.querySelector('#preview-color-hat'),
-    document.querySelector('#preview-color-pants'),
-    document.querySelector('#preview-color-hair'),
-    document.querySelector('#preview-color-skin'),
-    document.querySelector('#preview-color-gloves'),
-    document.querySelector('#preview-color-shoes'),
-]

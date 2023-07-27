@@ -10,8 +10,9 @@
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js">
     </script>
     <script src="js/data.js"></script>
+    <link rel="stylesheet" href="https://site.colleimadcat.com/css/style.css" type="text/css"/>
     <meta name="viewport" content="width=device-width, initial-scale=0.8">
-    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/style.css" type="text/css"/>
   </head>
   
   <body>
@@ -285,24 +286,7 @@
         <button type="button" class="mdl-button">关闭</button>
       </div>
     </dialog>
-    <script>
-      (function() {
-        'use strict';
-        window['counter'] = 0;
-        var snackbarContainer = document.querySelector('#comingsoonToast');
-        var showToastButton = document.getElementsByClassName('needcomingsoon');
-        for (var i = 0;i < showToastButton.length; i++){
-          showToastButton[i].addEventListener('click', function() {
-              'use strict';
-              var data = {
-                  message: '网页正在维护中，敬请期待...',
-                  timeout: 1500
-              };
-              snackbarContainer.MaterialSnackbar.showSnackbar(data);
-          })
-        }
-      }());
-    </script>
+    <script src="https://site.colleimadcat.com/js/componets/comingsoon.js"></script>
     <script src="js/componets/about.js"></script>
     <script src="js/cghint.js"></script>
     <script src="js/querybind.js"></script>

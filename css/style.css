@@ -1,8 +1,3 @@
-@media screen and (max-width:480px) {
-	.mdl-layout__header-row .mdl-layout-title {
-        display:none;
-    }
-}
 @media screen and (max-width:800px) {
 	.banner-image img {
         width:600px !important;
@@ -51,43 +46,11 @@ body {
 .mdl-layout__container {
 	background-color:rgba(255,254,255,0.8);
 }
-* {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-.mdl-layout-title * {
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-}
-.mdl-layout__header .mdl-layout-title {
-	font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif !important;
-}
-.footer {
-	text-align:center;
-}
 .transition-left {
 	transform-origin:center right;
 }
-.footer p {
-	margin:0.25em 0;
-}
 .colorPicker table tbody td,.colorPicker table thead td{
     text-align: center;
-}
-.pages-bottom-right {
-	position:fixed;
-	display:flex;
-	right:0;
-	bottom:0;
-	margin:0 2em 2em 0;
-	z-index:900;
-	flex-direction:column;
-}
-.pages-bottom-right button {
-	margin:0.25em 0;
-}
-.mdl-dialog {
-	min-width:360px;
-	width:inherit;
-	max-width:max-content;
 }
 .generate-area {
 	margin-top:1em;
@@ -99,28 +62,4 @@ body {
 }
 .background-color-setting-radios div {
 	margin:0.5em 0;
-}
-.padding-1 {
-	padding:1em;
-}
-.padding-2 {
-	padding:1.5em;
-}
-.padding-3 {
-	padding:2em;
-}
-.margin-1 {
-	margin:0.25em;
-}
-.margin-2 {
-	margin:0.5em;
-}
-.margin-3 {
-	margin:1em;
-}
-.margin-4 {
-	margin:2em;
-}
-.blur-1 {
-	backdrop-filter:blur(16px);
 }
