@@ -5,6 +5,16 @@
 }
 @media screen and (max-width:800px) {
 	.banner-image img {
+        width:600px !important;
+    }
+}
+@media screen and (max-width:640px) {
+	.banner-image img {
+        width:400px !important;
+    }
+}
+@media screen and (max-width:440px) {
+	.banner-image img {
         width:240px !important;
     }
 }
@@ -29,8 +39,9 @@ body {
 	width:768px;
 }
 .preview-color {
-	width:100%;
-	height:100%;
+    border: 1px solid black;
+	width:50px;
+	height:24px;
 }
 .colorPicker {
 	display:flex;
@@ -39,6 +50,12 @@ body {
 }
 .mdl-layout__container {
 	background-color:rgba(255,254,255,0.8);
+}
+* {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.mdl-layout-title * {
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
 }
 .mdl-layout__header .mdl-layout-title {
 	font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif !important;
@@ -50,7 +67,10 @@ body {
 	transform-origin:center right;
 }
 .footer p {
-	margin:0.5em 0;
+	margin:0.25em 0;
+}
+.colorPicker table tbody td,.colorPicker table thead td{
+    text-align: center;
 }
 .pages-bottom-right {
 	position:fixed;
