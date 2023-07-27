@@ -1,513 +1,788 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-</head>
-
-<body>
-  <div class="colorPicker" style="text-align: center;">
-    <form>
-      <p>Select a Color.</p>
-      <table style="margin:0 auto" border="1">
-        <tbody>
-          <tr>
-            <td style="padding:32px" rowspan="2">
-              <table class="wikitable">
-                <tbody>
-                  <tr>
-                    <th></th>
-                    <th>Main</th>
-                    <th>Shading</th>
-                  </tr>
-                  <tr>
-                    <th colspan="3">Main Settings</th>
-                  </tr>
-                  <tr>
-                    <td>Hat
-                    </td>
-                    <td>
-                      <input type="color" id="hatColor" value="#ff0000" onchange="colorExecute(hatMain)">
-                    </td>
-                    <td>
-                      <input type="color" id="hatColorShadow" value="#7f0000" onchange="colorExecute(hatShadow)">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Pants
-                    </td>
-                    <td>
-                      <input type="color" id="pantsColor" value="#0000ff" onchange="colorExecute(pantsMain)">
-                    </td>
-                    <td>
-                      <input type="color" id="pantsColorShadow" value="#00007f" onchange="colorExecute(pantsShadow)">
-                    </td>
-                  </tr>
-                  <tr>
-                    <th colspan="3">Other Settings</th>
-                  </tr>
-                  <tr>
-                    <td>Hair
-                    </td>
-                    <td>
-                      <input type="color" id="hairColor" value="#730600" onchange="colorExecute(hairMain)">
-                    </td>
-                    <td>
-                      <input type="color" id="hairColorShadow" value="#390300" onchange="colorExecute(hairShadow)">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Skin
-                    </td>
-                    <td>
-                      <input type="color" id="skinColor" value="#fec179" onchange="colorExecute(skinMain)">
-                    </td>
-                    <td>
-                      <input type="color" id="skinColorShadow" value="#81603c" onchange="colorExecute(skinShadow)">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Gloves
-                    </td>
-                    <td>
-                      <input type="color" id="glovesColor" value="#ffffff" onchange="colorExecute(glovesMain)">
-                    </td>
-                    <td>
-                      <input type="color" id="glovesColorShadow" value="#7f7f7f" onchange="colorExecute(glovesShadow)">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Shoes
-                    </td>
-                    <td>
-                      <input type="color" id="shoesColor" value="#721c0e" onchange="colorExecute(shoesMain)">
-                    </td>
-                    <td>
-                      <input type="color" id="shoesColorShadow" value="#2f0e07" onchange="colorExecute(shoesShadow)">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="3">
-                      <div>
-                        <div style="display:inline-block">
-                          <input type="radio" name="screen" id="screengreen" checked="checked"
-                            onclick="changeBackground(0)">
-                          <label>Green</label>
-                        </div>
-                        <div style="display:inline-block">
-                          <input type="radio" name="screen" id="screenpink" onclick="changeBackground(1)">
-                          <label>Pink</label>
-                        </div>
-                        <div style="display:inline-block">
-                          <input type="radio" name="screen" id="screenblue" onclick="changeBackground(2)">
-                          <label>Blue</label>
-                        </div>
-                      </div>
-                      <div>
-                        <div style="display:inline-block">
-                          <input type="radio" name="screen" id="screenred" onclick="changeBackground(3)">
-                          <label>Red</label>
-                        </div>
-                        <div style="display:inline-block">
-                          <input type="radio" name="screen" id="screenyellow" onclick="changeBackground(4)">
-                          <label>Yellow</label>
-                        </div>
-                        <div style="display:inline-block">
-                          <input type="radio" name="screen" id="screenclear" onclick="changeBackground(5)">
-                          <label>Clear</label>
-                        </div>
-                        <div>
-                          <input type="button" value="Generate for USA[U]" style="margin-top:8px;"
-                            onclick="cheatCodeGenerate(0)">
-                          <input type="button" value="Generate for CHN(iQue)" style="margin-top:8px;"
-                            onclick="cheatCodeGenerate(1)">
-                        </div>
-                      </div>
-
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </td>
-            <td>
-              <p>PREVIEW</p>
-            </td>
-            <td>
-              <p>GENERATED CODE</p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <canvas id="marioIdPreview" width="304" height="384"></canvas>
-            </td>
-            <td>
-              <table>
-                <tbody>
-                  <tr>
-                    <td>
-                      <textarea style="font-family: monospace; height: 500px; width: 245px;"
-                        id="GeneratedCode"></textarea>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <input type="button" value="Copy To Clipboard" onclick="copyContent()">
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </td>
-          </tr>
-
-        </tbody>
-      </table>
-    </form>
-  </div>
-<footer>
-  <p>© 2016~2023 Collei_Madcat, Unreal_Neo Studios. All Rights Reserved.</p>
-  <p>© CaptainSwag101 M64MM2 and Color Generator.</p>
-  <p>© GlitchyPSIX M64MM3</p>
-  <p>This Color Code Generator is Public domain, technical support for creators in the Super Mario 64 Blooper Community, and is free for anyone to use, co-developed by 8192Bit</p>
-</footer>
-</body>
-<script>
-  var masks = {
-    "empty": [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
-    "hat": [[0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0],
-    [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0],
-    [0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0],
-    [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1],
-    [0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
-    "pants": [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0],
-    [0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0],
-    [0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0],
-    [0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0],
-    [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-    [0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
-    "hair": [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
-    "skin": [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0],
-    [0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0],
-    [0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1],
-    [0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0],
-    [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
-    "gloves": [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-    [1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1],
-    [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
-    "shoes": [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0],
-    [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1]],
-    "face": [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
-    "blocks": [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
-  }
-  var backColor = ["#00ff00", "#ff00ff", "#0000ff", "#ff0000", "#ffff00"];
-  var memoryAddress = [[
-    0x8107EC38,
-    0x8107EC40,
-    0x8107EC98,
-    0x8107ECA0,
-    0x8107EC80,
-    0x8107EC88,
-    0x8107EC50,
-    0x8107EC58,
-    0x8107EC20,
-    0x8107EC28,
-    0x8107EC68,
-    0x8107EC70,//USA
-  ], [
-    0x810610A8,
-    0x810610B0,
-    0x81061108,
-    0x81061110,
-    0x810610F0,
-    0x810610F8,
-    0x810610C0,
-    0x810610C8,
-    0x81061090,
-    0x81061098,
-    0x810610D8,
-    0x810610E0 //CHN
-  ]]
-</script>
-
-<script>
-  var hatMain = document.querySelector('#hatColor')
-  var hatShadow = document.querySelector('#hatColorShadow')
-  var pantsMain = document.querySelector('#pantsColor')
-  var pantsShadow = document.querySelector('#pantsColorShadow')
-  var hairMain = document.querySelector('#hairColor')
-  var hairShadow = document.querySelector('#hairColorShadow')
-  var skinMain = document.querySelector('#skinColor')
-  var skinShadow = document.querySelector('#skinColorShadow')
-  var glovesMain = document.querySelector('#glovesColor')
-  var glovesShadow = document.querySelector('#glovesColorShadow')
-  var shoesMain = document.querySelector('#shoesColor')
-  var shoesShadow = document.querySelector('#shoesColorShadow')
-  var cheatColorTemp = [
-    [hatMain.value, pantsMain.value, hairMain.value, skinMain.value, glovesMain.value, shoesMain.value],
-    [hatShadow.value, pantsShadow.value, hairShadow.value, skinShadow.value, glovesShadow.value, shoesShadow.value]]
-</script>
-<script>
-  var c = document.getElementById('marioIdPreview');
-  var ctx = c.getContext("2d")
-  ctx.fillStyle = "#00ff00"
-  ctx.fillRect(0, 0, 999, 999)
-  var start_x = 32;
-  var start_y = 32;
-  function drawPixel(w, h) {
-    ctx.fillRect(start_x + w * 20, start_y + h * 20, 20, 20)
-  }
-  function copyContent() {
-    document.getElementById("GeneratedCode").focus()
-    document.getElementById("GeneratedCode").select()
-    if (document.execCommand("copy")) {
-      alert("Successfully copied the code to clipboard.")
-    }
-    else {
-      alert("Failed to copy the code to clipboard. Have you got the clipboard premission?")
-    }
-    // legacy API execCommand used here to avoid mobile browser clipboard problem
-  }
-  function initColor() {
-    run("#ff0000", hatMain.id);
-    run("#0000ff", pantsMain.id);
-    run("#730600", hairMain.id);
-    run("#FEC179", skinMain.id);
-    run("#ffffff", glovesMain.id);
-    run("#730600", shoesMain.id);
-    run("#000000", "face");
-    run("#e39d25", "blocks");
-  }
-  function changeBackground(a) {
-    if (a < 5) {
-      ctx.fillStyle = backColor[a];
+  
+  <head>
+    <meta http-equiv="content-type" content="text/html;" charset="utf-8">
+    <title>Mario ID Color Genreator - Collei_Madcat</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js">
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css"/>
+    <style type="text/css">
+      body {
+        background-image: url(images/background.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center center;
+        background-size: cover;
+      }
+      .mdl-layout__container {
+        background-color: rgba(255,254,255,0.8);
+      }
+      .mdl-layout__header .mdl-layout-title {
+        font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif !important;
+      }
+      .colorPicker{
+        display: flex;
+        margin: 0 auto;
+        justify-content: center;
+      }
+      .footer {
+        text-align:center;
+      }
+      .transition-left {
+        transform-origin:center right;
+      }
+      .footer p {
+        margin:0.5em 0;
+      }
+      .pages-bottom-right {
+        position:fixed;
+        display:flex;
+        right:0;
+        bottom:0;
+        margin:0 2em 2em 0;
+        z-index:900;
+        flex-direction:column;
+      }
+      .pages-bottom-right button {
+        margin:0.25em 0;
+      }
+      .mdl-dialog {
+        min-width:360px;
+        width:inherit;
+        max-width:max-content;
+      }
+      .generate-area {
+        margin-top:1em;
+        display:flex;
+        justify-content:space-around;
+      }
+      .generate-buttons {
+        margin:0 0.25em;
+      }
+      .background-color-setting-radios div {
+        margin:0.5em 0;
+      }
+      .padding-1 {
+        padding:1em;
+      }
+      .padding-2 {
+        padding:1.5em;
+      }
+      .padding-3 {
+        padding:2em;
+      }
+      .margin-1{
+        margin:0.25em;
+      }
+      .margin-2{
+        margin:0.5em;
+      }
+      .margin-3{
+        margin:1em;
+      }
+      .margin-4{
+        margin:2em;
+      }
+      .blur-1{
+        backdrop-filter: blur(16px);
+      }
+    </style>
+  </head>
+  
+  <body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">Mario ID Color Generator</span>
+          <!-- Add spacer, to align navigation to the right -->
+          <div class="mdl-layout-spacer">
+          </div>
+          <!-- Navigation. We hide it in small screens. -->
+          <nav class="mdl-navigation mdl-layout--large-screen-only">
+            <a class="mdl-navigation__link" href="https://colleimadcat.com/">主页</a>
+            <a class="mdl-navigation__link needcomingsoon" href="#">博客</a>
+            <a class="mdl-navigation__link" href="https://wiki.colleimadcat.com/">Wiki</a>
+            <a class="mdl-navigation__link needcomingsoon" href="#">工具</a>
+          </nav>
+          <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
+            <i class="material-icons">more_vert</i>
+          </button>
+          <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-right">
+            <li class="mdl-menu__item needcomingsoon">关于网站</li>
+            <li class="mdl-menu__item needcomingsoon">联系我们</li>
+          </ul>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Collei_Madcat Site</span>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="https://colleimadcat.com/">
+            <i class="material-icons">home</i>&nbsp;主页</a>
+          <a class="mdl-navigation__link needcomingsoon" href="#">
+            <i class="material-icons">bookmarks</i>&nbsp;博客</a>
+          <a class="mdl-navigation__link" href="https://wiki.colleimadcat.com/">
+            <i class="material-icons">menu_book</i>&nbsp;Wiki</a>
+          <a class="mdl-navigation__link needcomingsoon" href="#" id="tools">
+            <i class="material-icons">build</i>&nbsp;工具</a>
+        </nav>
+      </div>
+      <main class="mdl-layout__content">
+        <!--Page Content Start-->
+        <div class="page-content padding-1">
+          <form>
+            <div style="display:flex">
+              <img src="images/banner.png" style="margin:0 auto; width:768px;">
+            </div>
+            <div class="colorPicker padding-1" style="text-align:center;">
+              <div class="marioID-color-picker-area mdl-shadow--6dp padding-3 margin-4 blur-1">
+                <div class="color-setting">
+                  <p>Color Picker</p>
+                  <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                    <thead>
+                      <tr style="font-weight: bold;">
+                        <td>
+                        </td>
+                        <td>Light</td>
+                        <td>Shadow</td>
+                        <td>Preview</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td colspan="4">Main Settings</td>
+                      </tr>
+                      <tr>
+                        <td>Hat</td>
+                        <td>
+                          <input type="color" id="hatColor" value="#ff0000" onchange="colorExecute(hatMain)">
+                        </td>
+                        <td>
+                          <input type="color" id="hatColorShadow" value="#7f0000" onchange="colorExecute(hatShadow)">
+                        </td>
+                        <td>
+                          <div class="preview-color" id="preview-color-hat">
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Pants</td>
+                        <td>
+                          <input type="color" id="pantsColor" value="#0000ff" onchange="colorExecute(pantsMain)">
+                        </td>
+                        <td>
+                          <input type="color" id="pantsColorShadow" value="#00007f" onchange="colorExecute(pantsShadow)">
+                        </td>
+                        <td>
+                          <div class="preview-color" id="preview-color-pants">
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="4">Other Settings</td>
+                      </tr>
+                      <tr>
+                        <td>Hair</td>
+                        <td>
+                          <input type="color" id="hairColor" value="#730600" onchange="colorExecute(hairMain)">
+                        </td>
+                        <td>
+                          <input type="color" id="hairColorShadow" value="#390300" onchange="colorExecute(hairShadow)">
+                        </td>
+                        <td>
+                          <div class="preview-color" id="preview-color-hat">
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Skin</td>
+                        <td>
+                          <input type="color" id="skinColor" value="#fec179" onchange="colorExecute(skinMain)">
+                        </td>
+                        <td>
+                          <input type="color" id="skinColorShadow" value="#81603c" onchange="colorExecute(skinShadow)">
+                        </td>
+                        <td>
+                          <div class="preview-color" id="preview-color-pants">
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Gloves</td>
+                        <td>
+                          <input type="color" id="glovesColor" value="#ffffff" onchange="colorExecute(glovesMain)">
+                        </td>
+                        <td>
+                          <input type="color" id="glovesColorShadow" value="#7f7f7f" onchange="colorExecute(glovesShadow)">
+                        </td>
+                        <td>
+                          <div class="preview-color" id="preview-color-hat">
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Shoes</td>
+                        <td>
+                          <input type="color" id="shoesColor" value="#721c0e" onchange="colorExecute(shoesMain)">
+                        </td>
+                        <td>
+                          <input type="color" id="shoesColorShadow" value="#2f0e07" onchange="colorExecute(shoesShadow)">
+                        </td>
+                        <td>
+                          <div class="preview-color" id="preview-color-pants">
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="generate-area" style="margin-top: 1em;">
+                  <div class="generate-buttons">
+                    <button id="generateColorU" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-shadow--2dp" onclick="cheatCodeGenerate(0)" href="#">
+                      <i class="material-icons">add_box</i>
+                    </button>
+                    <span>&nbsp;USA Rom</span>
+                  </div>
+                  <div class="generate-buttons">
+                    <button id="generateColorC" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-shadow--2dp" onclick="cheatCodeGenerate(1)" href="#">
+                      <i class="material-icons">add_box</i>
+                    </button>
+                    <span>&nbsp;iQue Rom</span>
+                  </div>
+                </div>
+              </div>
+              <div class="marioID-color-preview-area mdl-shadow--6dp padding-3 margin-4 blur-1">
+                <p>Mario ID Color Preview</p>
+                <canvas id="marioIdPreview" class="mdl-shadow--6dp" width="304" height="384">
+                </canvas>
+                <div class="background-color-setting" style="margin-top: 1em;">
+                  <p>Background Color</p>
+                  <div class="mdl-shadow--3dp background-color-setting-radios" style="padding:1em">
+                    <div>
+                      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="screengreen">
+                        <input type="radio" id="screengreen" class="mdl-radio__button" name="screen" checked onclick="changeBackground(0)">
+                        <span class="mdl-radio__label">Green</span>
+                      </label>
+                      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="screenpink">
+                        <input type="radio" id="screenpink" class="mdl-radio__button" name="screen" onclick="changeBackground(1)">
+                        <span class="mdl-radio__label">Pink</span>
+                      </label>
+                    </div>
+                    <div>
+                      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="screenblue">
+                        <input type="radio" id="screenblue" class="mdl-radio__button" name="screen" onclick="changeBackground(2)">
+                        <span class="mdl-radio__label">Blue</span>
+                      </label>
+                      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="screenred">
+                        <input type="radio" id="screenred" class="mdl-radio__button" name="screen" onclick="changeBackground(3)">
+                        <span class="mdl-radio__label">Red</span>
+                      </label>
+                      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="screenyellow">
+                        <input type="radio" id="screenyellow" class="mdl-radio__button" name="screen" onclick="changeBackground(4)">
+                        <span class="mdl-radio__label">Yellow</span>
+                      </label>
+                    </div>
+                    <div>
+                      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="screencustom">
+                        <input type="radio" id="screencustom" class="mdl-radio__button" name="screen" onclick="changeBackground(5)">
+                        <span class="mdl-radio__label">Custom</span>
+                        <input type="color" id="backcolorCustom" value="#a9e5cb" style="height: 24px;">
+                      </label>
+                    </div>
+                    <div>
+                      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="screenclear">
+                        <input type="radio" id="screenclear" class="mdl-radio__button" name="screen" onclick="changeBackground(6)">
+                        <span class="mdl-radio__label">Clear</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="generate-code-area mdl-shadow--6dp padding-3 margin-4 blur-1">
+                <p>Color Code</p>
+                <div class="generated-area">
+                  <div class="mdl-textfield mdl-js-textfield">
+                    <textarea style="resize:none; font-family:monospace; height: 450px; width: 100%;" id="GeneratedCode" class="mdl-textfield__input mdl-shadow--2dp"></textarea>
+                  </div>
+                </div>
+                <button id="copycolorcode" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-shadow--4dp" onclick="copyContent()" href="#" style="margin-top: 1em;">
+                  <i class="material-icons">assignment</i>
+                </button>
+              </div>
+            </div>
+            <div class="pages-bottom-right">
+              <button id="language" class="mdl-button mdl-button--colored mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-shadow--3dp" href="#">
+                <i class="material-icons">language</i>
+              </button>
+              <ul class="mdl-menu mdl-menu--top-right mdl-js-menu mdl-js-ripple-effect" for="language">
+                <li class="mdl-menu__item">English (US)</li>
+                <li class="mdl-menu__item">简体中文（中国）</li>
+              </ul>
+              <button id="about" class="mdl-button mdl-button--colored mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-shadow--3dp" href="#">
+                <i class="material-icons">info_outlined</i>
+              </button>
+            </div>
+          </form>
+        </div>
+        <div id="generateColorToast" aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar">
+          <div class="mdl-snackbar__text"></div>
+          <button type="button" class="mdl-snackbar__action"></button>
+        </div>
+        <div id="copyToast" aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar">
+          <div class="mdl-snackbar__text"></div>
+          <button type="button" class="mdl-snackbar__action"></button>
+        </div>
+        <!--Page Content End-->
+      </main>
+      <div id="comingsoonToast" aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar">
+        <div class="mdl-snackbar__text"></div>
+        <button type="button" class="mdl-snackbar__action"></button>
+      </div>
+    </div>
+    <div class="mdl-tooltip" data-mdl-for="copycolorcode">Copy to Clipboard</div>
+    <div class="mdl-tooltip transition-left mdl-tooltip--left" data-mdl-for="about">About</div>
+    <div class="mdl-tooltip transition-left mdl-tooltip--left" data-mdl-for="language">Language</div>
+    <dialog id="dialog" class="mdl-dialog">
+      <h3 class="mdl-dialog__title">关于 Mario ID 生成器</h3>
+      <div class="mdl-dialog__content">
+        <div class="footer">
+          <p>© 2016~2023 Collei_Madcat, Unreal_Neo Studios. All Rights Reserved.</p>
+          <p>© CaptainSwag101 M64MM2 and Color Generator.</p>
+          <p>© GlitchyPSIX M64MM3</p>
+          <p>Co-developed by 8192Bit.</p>
+          <p>This Color Code Generator is Public domain, technical support for creators in the Super Mario 64 Blooper Community.
+            <br/>This is free for anyone to use.</p>
+        </div>
+      </div>
+      <div class="mdl-dialog__actions">
+        <button type="button" class="mdl-button">关闭</button>
+      </div>
+    </dialog>
+    <script>
+      (function() {
+        'use strict';
+        window['counter'] = 0;
+        var snackbarContainer = document.querySelector('#comingsoonToast');
+        var showToastButton = document.getElementsByClassName('needcomingsoon');
+        for (var i = 0;i < showToastButton.length; i++){
+          showToastButton[i].addEventListener('click', function() {
+              'use strict';
+              var data = {
+                  message: '网页正在维护中，敬请期待...',
+                  timeout: 1500
+              };
+              snackbarContainer.MaterialSnackbar.showSnackbar(data);
+          })
+        }
+      }());
+    </script>
+    <script>
+      (function() {
+        'use strict';
+        window['counter'] = 0;
+        var snackbarContainer = document.querySelector('#generateColorToast');
+        var showToastButton = document.querySelector('#generateColorU');
+        showToastButton.addEventListener('click', function() {
+          'use strict';
+          var data = {message: 'Color Generated.'};
+          snackbarContainer.MaterialSnackbar.showSnackbar(data);
+        });
+      }());
+      (function() {
+        'use strict';
+        window['counter'] = 0;
+        var snackbarContainer = document.querySelector('#generateColorToast');
+        var showToastButton = document.querySelector('#generateColorC');
+        showToastButton.addEventListener('click', function() {
+          'use strict';
+          var data = {message: 'Color Generated.'};
+          snackbarContainer.MaterialSnackbar.showSnackbar(data);
+        });
+      }());
+      (function() {
+        'use strict';
+        window['bool'];
+        var snackbarContainer = document.querySelector('#copyToast');
+        var showToastButton = document.querySelector('#copycolorcode');
+        showToastButton.addEventListener('click', function() {
+          'use strict';
+          if (bool) {
+            var data = {message: 'Successfully copied the code to clipboard.'};
+          }
+          else {
+            var data = {message: 'Failed to copy the code to clipboard. Have you got the clipboard premission?'};
+          }
+          snackbarContainer.MaterialSnackbar.showSnackbar(data);
+        });
+      }());
+    </script>
+    <script>
+        (function() {
+          'use strict';
+          var dialogButton = document.querySelector('#about');
+          var dialog = document.querySelector('#dialog');
+          if (! dialog.showModal) {
+            dialogPolyfill.registerDialog(dialog);
+          }
+          dialogButton.addEventListener('click', function() {
+            dialog.showModal();
+          });
+          dialog.querySelector('button:not([disabled])')
+          .addEventListener('click', function() {
+            dialog.close();
+          });
+        }());
+    </script>
+    <script>
+      var masks = {
+        "empty": [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
+        "hat": [[0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+        [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0],
+        [0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0],
+        [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1],
+        [0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
+        "pants": [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0],
+        [0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0],
+        [0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0],
+        [0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0],
+        [0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+        [0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
+        "hair": [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+        [0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+        [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
+        "skin": [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0],
+        [0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0],
+        [0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1],
+        [0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
+        "gloves": [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+        [1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1],
+        [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
+        "shoes": [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0],
+        [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1]],
+        "face": [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
+        "blocks": [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+      }
+      var backColor = ["#00ff00", "#ff00ff", "#0000ff", "#ff0000", "#ffff00"];
+      var memoryAddress = [[
+        0x8107EC38,
+        0x8107EC40,
+        0x8107EC98,
+        0x8107ECA0,
+        0x8107EC80,
+        0x8107EC88,
+        0x8107EC50,
+        0x8107EC58,
+        0x8107EC20,
+        0x8107EC28,
+        0x8107EC68,
+        0x8107EC70,//USA
+      ], [
+        0x810610A8,
+        0x810610B0,
+        0x81061108,
+        0x81061110,
+        0x810610F0,
+        0x810610F8,
+        0x810610C0,
+        0x810610C8,
+        0x81061090,
+        0x81061098,
+        0x810610D8,
+        0x810610E0 //CHN
+      ]]
+    </script>
+  
+    <script>
+      var hatMain = document.querySelector('#hatColor')
+      var hatShadow = document.querySelector('#hatColorShadow')
+      var pantsMain = document.querySelector('#pantsColor')
+      var pantsShadow = document.querySelector('#pantsColorShadow')
+      var hairMain = document.querySelector('#hairColor')
+      var hairShadow = document.querySelector('#hairColorShadow')
+      var skinMain = document.querySelector('#skinColor')
+      var skinShadow = document.querySelector('#skinColorShadow')
+      var glovesMain = document.querySelector('#glovesColor')
+      var glovesShadow = document.querySelector('#glovesColorShadow')
+      var shoesMain = document.querySelector('#shoesColor')
+      var shoesShadow = document.querySelector('#shoesColorShadow')
+      var cheatColorTemp = [
+        [hatMain.value, pantsMain.value, hairMain.value, skinMain.value, glovesMain.value, shoesMain.value],
+        [hatShadow.value, pantsShadow.value, hairShadow.value, skinShadow.value, glovesShadow.value, shoesShadow.value]]
+    </script>
+    <script>
+      var c = document.getElementById('marioIdPreview');
+      var ctx = c.getContext("2d")
+      ctx.fillStyle = "#00ff00"
       ctx.fillRect(0, 0, 999, 999)
-    }
-    else {
-      ctx.clearRect(0, 0, 999, 999)
-    }
-    run(hatMain.value, hatMain.id);
-    run(pantsMain.value, pantsMain.id);
-    run(hairMain.value, hairMain.id);
-    run(skinMain.value, skinMain.id);
-    run(glovesMain.value, glovesMain.id);
-    run(shoesMain.value, shoesMain.id);
-    run("#000000", "face");
-    run("#e39d25", "blocks");
-  }
-  function setCheatCode(index) {
-    var cheatColorTemp = [
-      [hatShadow.value, hairShadow.value, skinShadow.value, glovesShadow.value, pantsShadow.value, shoesShadow.value],
-      [hatMain.value, hairMain.value, skinMain.value, glovesMain.value, pantsMain.value, shoesMain.value]]
-    var temp_a = ""
-    var temp_b = ""
-    var temp_c = ""
-    var temp_d = ""
-    var temp_e = 0
-    var temp_f = ""
-    var final = ""
-    for (var a = 0; a < 6; a++) {
-      for (var b = 0; b < 2; b++) {
-        temp_a = cheatColorTemp[b][a].slice(1, 7)
-        temp_b = temp_a.slice(0, 4)
-        temp_c = temp_a.slice(4, 6) + "00"
-        temp_d = (memoryAddress[index][temp_e] + 0).toString('16')
-        temp_f = (memoryAddress[index][temp_e] + 2).toString('16')
-        temp_e++
-        final = final + temp_d + " " + temp_b + "\r\n" + temp_f + " " + temp_c + "\r\n";
+      var start_x = 32;
+      var start_y = 32;
+      var bcce = document.querySelector('#backcolorCustom');
+      function drawPixel(w, h) {
+        ctx.fillRect(start_x + w * 20, start_y + h * 20, 20, 20)
       }
-    }
-    return final.toUpperCase();
-  }
-  function cheatCodeGenerate(index) {
-    document.getElementById("GeneratedCode").value = setCheatCode(index);
-  }
-  function run(color, queryID) {
-    ctx.fillStyle = color
-    for (var h = 0; h < 16; h++) {
-      for (var w = 0; w < 12; w++) {
-        if (queryID == "hatColor") {
-          if (masks.hat[h][w] == 1) {
-            drawPixel(w, h);
-          }
+      function copyContent() {
+        document.getElementById("GeneratedCode").focus()
+        document.getElementById("GeneratedCode").select()
+        if (document.execCommand("copy")) {
+          bool=true;
+          //alert("Successfully copied the code to clipboard.")
         }
-        if (queryID == "pantsColor") {
-          if (masks.pants[h][w] == 1) {
-            drawPixel(w, h);
-          }
-        }
-        if (queryID == "hairColor") {
-          if (masks.hair[h][w] == 1) {
-            drawPixel(w, h);
-          }
-        }
-        if (queryID == "skinColor") {
-          if (masks.skin[h][w] == 1) {
-            drawPixel(w, h);
-          }
-        }
-        if (queryID == "glovesColor") {
-          if (masks.gloves[h][w] == 1) {
-            drawPixel(w, h);
-          }
-        }
-        if (queryID == "shoesColor") {
-          if (masks.shoes[h][w] == 1) {
-            drawPixel(w, h);
-          }
-        }
-        if (queryID == "face") {
-          if (masks.face[h][w] == 1) {
-            drawPixel(w, h);
-          }
-        }
-        if (queryID == "blocks") {
-          if (masks.blocks[h][w] == 1) {
-            drawPixel(w, h);
-          }
+        else {
+          bool=false;
+          //alert("Failed to copy the code to clipboard. Have you got the clipboard premission?")
         }
       }
-    }
-  }
-  console.log("Array");
-  console.log("selector");
-  initColor()
-  function colorExecute(queryID) {
-    if ((queryID == hatMain) || (queryID == pantsMain) || (queryID == hairMain) || (queryID == skinMain) || (queryID == glovesMain) || (queryID == shoesMain)) {
-      run(queryID.value, queryID.id);
-    }
-  }
-</script>
-<style>
-  * {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-
-  .colorPicker table td {
-    text-align: center;
-  }
-  footer {
-    text-align: center;
-  }
-  footer p {
-    margin:0 auto;
-  }
-</style>
+      function initColor() {
+        run("#ff0000", hatMain.id);
+        run("#0000ff", pantsMain.id);
+        run("#730600", hairMain.id);
+        run("#FEC179", skinMain.id);
+        run("#ffffff", glovesMain.id);
+        run("#730600", shoesMain.id);
+        run("#000000", "face");
+        run("#e39d25", "blocks");
+      }
+      function changeBackground(a) {
+        if (a < 5) {
+          ctx.fillStyle = backColor[a];
+          ctx.fillRect(0, 0, 999, 999)
+        }
+        else if (a == 5) {
+          console.log(bcce.value);
+          ctx.fillStyle = bcce.value;
+          ctx.fillRect(0, 0, 999, 999)
+        }
+        else {
+          ctx.clearRect(0, 0, 999, 999)
+        }
+        run(hatMain.value, hatMain.id);
+        run(pantsMain.value, pantsMain.id);
+        run(hairMain.value, hairMain.id);
+        run(skinMain.value, skinMain.id);
+        run(glovesMain.value, glovesMain.id);
+        run(shoesMain.value, shoesMain.id);
+        run("#000000", "face");
+        run("#e39d25", "blocks");
+      }
+      function setCheatCode(index) {
+        var cheatColorTemp = [
+          [hatShadow.value, hairShadow.value, skinShadow.value, glovesShadow.value, pantsShadow.value, shoesShadow.value],
+          [hatMain.value, hairMain.value, skinMain.value, glovesMain.value, pantsMain.value, shoesMain.value]]
+        var temp_a = ""
+        var temp_b = ""
+        var temp_c = ""
+        var temp_d = ""
+        var temp_e = 0
+        var temp_f = ""
+        var final = ""
+        for (var a = 0; a < 6; a++) {
+          for (var b = 0; b < 2; b++) {
+            temp_a = cheatColorTemp[b][a].slice(1, 7)
+            temp_b = temp_a.slice(0, 4)
+            temp_c = temp_a.slice(4, 6) + "00"
+            temp_d = (memoryAddress[index][temp_e] + 0).toString('16')
+            temp_f = (memoryAddress[index][temp_e] + 2).toString('16')
+            temp_e++
+            final = final + temp_d + " " + temp_b + "\r\n" + temp_f + " " + temp_c + "\r\n";
+          }
+        }
+        return final.toUpperCase();
+      }
+      function cheatCodeGenerate(index) {
+        document.getElementById("GeneratedCode").value = setCheatCode(index);
+      }
+      function run(color, queryID) {
+        ctx.fillStyle = color
+        for (var h = 0; h < 16; h++) {
+          for (var w = 0; w < 12; w++) {
+            if (queryID == "hatColor") {
+              if (masks.hat[h][w] == 1) {
+                drawPixel(w, h);
+              }
+            }
+            if (queryID == "pantsColor") {
+              if (masks.pants[h][w] == 1) {
+                drawPixel(w, h);
+              }
+            }
+            if (queryID == "hairColor") {
+              if (masks.hair[h][w] == 1) {
+                drawPixel(w, h);
+              }
+            }
+            if (queryID == "skinColor") {
+              if (masks.skin[h][w] == 1) {
+                drawPixel(w, h);
+              }
+            }
+            if (queryID == "glovesColor") {
+              if (masks.gloves[h][w] == 1) {
+                drawPixel(w, h);
+              }
+            }
+            if (queryID == "shoesColor") {
+              if (masks.shoes[h][w] == 1) {
+                drawPixel(w, h);
+              }
+            }
+            if (queryID == "face") {
+              if (masks.face[h][w] == 1) {
+                drawPixel(w, h);
+              }
+            }
+            if (queryID == "blocks") {
+              if (masks.blocks[h][w] == 1) {
+                drawPixel(w, h);
+              }
+            }
+          }
+        }
+      }
+      initColor()
+      function colorExecute(queryID) {
+        if ((queryID == hatMain) || (queryID == pantsMain) || (queryID == hairMain) || (queryID == skinMain) || (queryID == glovesMain) || (queryID == shoesMain)) {
+          run(queryID.value, queryID.id);
+        }
+      }
+    </script>
+    <style>
+      * {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+  
+      .colorPicker table td {
+        text-align: center;
+      }
+      footer {
+        text-align: center;
+      }
+      footer p {
+        margin:0 auto;
+      }
+    </style>
+  </body>
+</html>
