@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language>
+    <colorpicker>
+        <title>颜色选取器</title>
+        <top>
+            <light>亮光</light>
+            <shadow>阴影</shadow>
+            <preview>预览</preview>
+        </top>
+        <workspace>
+            <main>主颜色</main>
+            <other>副颜色</other>
+            <hat>帽子</hat>
+            <pants>背带裤</pants>
+            <hair>头发</hair>
+            <skin>皮肤</skin>
+            <gloves>手套</gloves>
+            <shoes>鞋靴</shoes>
+        </workspace>
+        <generate>   
+            <usa>USA</usa>
+            <ique>iQue</ique>
+        </generate>
+    </colorpicker>
+    <previewarea>
+        <title>Mario ID 颜色预览窗口</title>
+        <bgarea>
+            <title>背景色</title>
+            <green>绿幕</green>
+            <pink>粉幕</pink>
+            <blue>蓝幕</blue>
+            <red>红幕</red>
+            <yellow>黄幕</yellow>
+            <custom>自定义色</custom>
+            <clear>清除</clear>
+        </bgarea>
+    </previewarea>
+    <textarea>
+        <title>颜色代码</title>
+    </textarea>
+    <hint>
+        <generate>颜色已生成。</generate>
+        <copy>已将颜色代码复制到剪贴板。</copy>
+        <copyfailed>复制失败，请检查是否给予剪贴板相关的权限？</copyfailed>
+    </hint>
+    <other>
+        <language>Language</language>
+        <about>About</about>
+    </other>
+</language>

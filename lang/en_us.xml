@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language>
+    <colorpicker>
+        <title>Color Picker</title>
+        <top>
+            <light>Light</light>
+            <shadow>Shadow</shadow>
+            <preview>Preview</preview>
+        </top>
+        <workspace>
+            <main>Main Settings</main>
+            <other>Other Settings</other>
+            <hat>Hat</hat>
+            <pants>Pants</pants>
+            <hair>Hair</hair>
+            <skin>Skin</skin>
+            <gloves>Gloves</gloves>
+            <shoes>Shoes</shoes>
+        </workspace>
+        <generate>   
+            <usa>USA ROM</usa>
+            <ique>iQue Rom</ique>
+        </generate>
+    </colorpicker>
+    <previewarea>
+        <title>Mario ID Color Preview</title>
+        <bgarea>
+            <title>Background Color</title>
+            <green>Green</green>
+            <pink>Pink</pink>
+            <blue>Blue</blue>
+            <red>Red</red>
+            <yellow>Yellow</yellow>
+            <custom>Custom</custom>
+            <clear>Clear</clear>
+        </bgarea>
+    </previewarea>
+    <textarea>
+        <title>Color Code</title>
+    </textarea>
+    <hint>
+        <generate>Color Generated.</generate>
+        <copy>Successfully copied the code to clipboard.</copy>
+        <copyfailed>Failed to copy the code to clipboard. Have you got the clipboard premission?</copyfailed>
+    </hint>
+    <other>
+        <language>Language</language>
+        <about>About</about>
+    </other>
+</language>
